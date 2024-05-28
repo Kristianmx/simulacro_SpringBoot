@@ -2,6 +2,7 @@ package riwi.simulacro_SpringBoot.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import riwi.simulacro_SpringBoot.util.enums.EnumRole;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(nullable = false,unique = true,length = 150)
     private String username;
     @Column(nullable = false,length = 150)
