@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SimulacroSpringBootApplication<simulacro_SpringBoot>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "riwi.simulacro_SpringBoot.SimulacroSpringBootApplication",
+            "projectName": "simulacro_SpringBoot",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
