@@ -9,7 +9,7 @@ Creacion de carpetas arquitectura exagonal
 
 Configuracion base de datos con Railway (puerto 53554) 
 
-@ creacion de entidad user por parte de kris 
+@ creacion de entidad user por parte de kris dto y demas
 
 2. 
 
@@ -33,4 +33,21 @@ repositories/CoursesRepository.java
 Creacion del repositorio de Courses 
 
 5.
-> 
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/api/
+dto/requests/CourseRequest.java
+
+Creacion del dto CourseRequest con las restricciones 
+
+6.
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/api/
+dto/responses/CourseResponse.java
+
+Creacion del dto CourseResponse usando UserResponse para llamarlo 
+
+7.
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/infrastructure/
+abstrac_services/ICourseService.java
+
+Creacion del abstract service de Course 
+
+8.
