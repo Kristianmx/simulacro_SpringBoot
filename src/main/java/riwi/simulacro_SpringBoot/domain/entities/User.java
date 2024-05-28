@@ -64,5 +64,5 @@ public class User {
             cascade = CascadeType.ALL,
             orphanRemoval = false
     )
-    private List<Course> courses;
+    private List<Courses> courses;
 }
