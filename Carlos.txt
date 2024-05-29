@@ -1,24 +1,24 @@
 
                         martes 28 mayo 2024
 
-Creacion de carpetas arquitectura exagonal 
+Creacion de carpetas arquitectura exagonal
 
-1. 
+1.
 
 > simulacro_SpringBoot/src/main/resources/application.properties
 
-Configuracion base de datos con Railway (puerto 53554) 
+Configuracion base de datos con Railway (puerto 53554)
 
 @ creacion de entidad user por parte de kris dto y demas
 
-2. 
+2.
 
 > simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/util/
 enums/EnumRole.java
 
-Creacion del enum para el roll 
+Creacion del enum para el roll
 
-@ creacion crud generico 
+@ creacion crud generico
 
 3.
 > simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/domain/
@@ -26,29 +26,29 @@ entities/Courses.java
 
 Creacion de la entidad Courses con su respectivo one to many enlazado con User 
 
-4. 
+4.
 > simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/domain/
 repositories/CoursesRepository.java
 
-Creacion del repositorio de Courses 
+Creacion del repositorio de Courses
 
 5.
 > simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/api/
 dto/requests/CourseRequest.java
 
-Creacion del dto CourseRequest con las restricciones 
+Creacion del dto CourseRequest con las restricciones
 
 6.
 > simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/api/
 dto/responses/CourseResponse.java
 
-Creacion del dto CourseResponse usando UserResponse para llamarlo 
+Creacion del dto CourseResponse usando UserResponse para llamarlo
 
 7.
 > simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/infrastructure/
 abstrac_services/ICourseService.java
 
-Creacion del abstract service de Course 
+Creacion del abstract service de Course
 
 8.
 > simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/infrastructure/
@@ -57,24 +57,83 @@ services/CourseService.java
 Creamos el servicio de cursos extendiendo sus metodos HTTP
 
 9.
-creamos el metodo find para usarlo en los metodos del CRUD 
+creamos el metodo find para usarlo en los metodos del CRUD
 
 10.
-creamos el metodo que define el response de la entidad Cursos 
+creamos el metodo que define el response de la entidad Cursos
 
 11.
-Creamos el metodo que define el request de la entidad cursos 
+Creamos el metodo que define el request de la entidad cursos
 
         Estos metodos los usaremos en el resto de metodos HTTP
 
-12. 
-Desarrollamos el metodo create con el request de coursos para crear un 
+12.
+Desarrollamos el metodo create con el request de coursos para crear un
 nuevo cursos
 
 
 13.
 Desarrollamos el metodo delete haciendo uso del metodo find (9) para encontrar
-el id que queremos borrar 
+el id que queremos borrar
 
-14. 
+14.
 Desarrollamos el metodo get usando el metodo find (9) para obtener el Curso por ID
+
+15.
+Desarrollamos el metodo update usando el metodo find(9) para obtener el coruso y
+llamando a su request para ingresar los datos requeridos
+
+16.
+Desarrollamos el metodo getAll con paginacion para mostrar todos los cursos
+
+@ Desarrollo de swagger por àrte de kris
+
+Anexamos las dependencias correspondientes al archivo pomp del archivo
+> /home/riwip5-043/Desktop/simulacro_SpringBoot/pom.xml
+
+Ejecutamos el swagger con las etiquetas @Configuration y @OpenAPIDefinition
+> simulacro_SpringBoot/config/OpenApiConfig.java
+
+@ Manejo de errores por parte de kris
+
+> simulacro_SpringBoot/api/error_handler/BadRequestController.java
+
+@ Controller entidad User desarrollado por kris
+
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/api/
+controllers/CourseController.java
+
+17.
+Creamos el controlador de Cursos con las etiquetas y metodos respectivos
+
+                Todos deben contener el manejo de errores y la aplicacion
+                de swagger
+
+18.
+Desrrollamos el metodo getAll donde se ingresa la paginacion para mostrar todos
+los cursos
+
+19.
+metodo getById para buscar un curso ingresando u id
+
+20.
+Metodo delete que busca el curso por id y elimina todo su link 
+
+21.
+metodo actualizar donde hacemos uso del response para ingresar nuevamente los
+datos y actualizarlos 
+
+22.
+
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/infrastructure/
+services/CourseService.java
+
+En el metodo isert debemos garantizar que el ususario insertado tenga el ROL (enum)
+de USUARIO o INSTRUCTOR para lo cual debemos volver al servicio y crear un
+condicional en el cual se verifique el rol del usuario y solo si es el correcto
+se permita la creacion
+
+La comparacion (user.getRole().equals(EnumRole.INSTRUCTOR) ) se debe usar de esta
+manera debido a que el enum es un String y se puede llamar completamente como entidad
+
+

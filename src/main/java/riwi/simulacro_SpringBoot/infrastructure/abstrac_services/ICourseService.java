@@ -5,5 +5,4 @@ import riwi.simulacro_SpringBoot.api.dto.responses.CourseResponse;
 
 // 7 
 public interface ICourseService extends CrudService<CourseRequest,CourseResponse,Long>{
-    public Long FindById(Long id);
 }

@@ -10,22 +10,38 @@ import lombok.AllArgsConstructor;
 import riwi.simulacro_SpringBoot.api.dto.requests.CourseRequest;
 import riwi.simulacro_SpringBoot.api.dto.responses.CourseResponse;
 import riwi.simulacro_SpringBoot.domain.entities.Courses;
+import riwi.simulacro_SpringBoot.domain.entities.User;
 import riwi.simulacro_SpringBoot.domain.repositories.CoursesRepository;
+import riwi.simulacro_SpringBoot.domain.repositories.UserRepository;
 import riwi.simulacro_SpringBoot.infrastructure.abstrac_services.ICourseService;
+import riwi.simulacro_SpringBoot.util.enums.EnumRole;
 import riwi.simulacro_SpringBoot.util.exceptions.IdNotFoundException;
 
 // 8
 @Service
 @AllArgsConstructor
-public class CourseService implements ICourseService{
+public class CourseService implements ICourseService {
 
-    @Autowired final CoursesRepository coursesRepository;
-    
+    @Autowired
+    final CoursesRepository coursesRepository;
+
+    @Autowired
+    final UserRepository userRepository;
+
     // 12
+    // 22
     @Override
     public CourseResponse create(CourseRequest request) {
         Courses courses = this.requesToCourses(request, new Courses());
-        return this.entityResponse(this.coursesRepository.save(courses));
+        User user = this.userRepository.findById(request.getUser()).orElseThrow(()-> new IdNotFoundException("User"));
+        courses.setUser(user);
+        if (user.getRole().equals(EnumRole.INSTRUCTOR) ) {
+            return this.entityResponse(this.coursesRepository.save(courses));
+        }else{
+            return 
+        }
+
+        
     }
 
     // 14
@@ -34,22 +50,25 @@ public class CourseService implements ICourseService{
         return this.entityResponse(this.find(id));
     }
 
+    // 16
     @Override
-    public CourseResponse update(CourseRequest request, Long id) {
-        return null;
+    public CourseResponse update(CourseRequest request, Long aLong) {
+        Courses courses = this.find(aLong);
+        Courses courseUpdate = this.requesToCourses(request, courses);
+        return this.entityResponse(this.coursesRepository.save(courseUpdate));
     }
 
     // 13
     @Override
-    public void delete(Long id) {
-        Courses courses = this.find(id);
+    public void delete(Long aLong) {
+        Courses courses = this.find(aLong);
         this.coursesRepository.delete(courses);
     }
 
-    // 15 
+    // 15
     @Override
     public Page<CourseResponse> getAll(int page, int size) {
-        if(page < 0){
+        if (page < 0) {
             page = 0;
         }
         PageRequest pagination = PageRequest.of(page, size);
@@ -57,27 +76,22 @@ public class CourseService implements ICourseService{
         return this.coursesRepository.findAll(pagination).map(this::entityResponse);
     }
 
-    @Override
-    public Long FindById(Long id) {
-        return null;
-    }
-
     // 9
-    private Courses find(Long id){
+    private Courses find(Long id) {
         return this.coursesRepository.findById(id).orElseThrow(() -> new IdNotFoundException("Curso"));
     }
 
-    //10 
-    private CourseResponse entityResponse(Courses entity){
+    // 10
+    private CourseResponse entityResponse(Courses entity) {
         CourseResponse response = new CourseResponse();
         BeanUtils.copyProperties(entity, response);
         return response;
     }
 
     // 11
-    private Courses requesToCourses(CourseRequest request, Courses courses){
+    private Courses requesToCourses(CourseRequest request, Courses courses) {
         BeanUtils.copyProperties(request, courses);
         return courses;
     }
-    
+
 }
