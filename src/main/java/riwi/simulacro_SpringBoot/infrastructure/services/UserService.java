@@ -55,7 +55,7 @@ public class UserService implements IUserService {
     private User find(Long id){
         return this.userRepository.findById(id).orElseThrow(()->new IdNotFoundException("User"));
     }
-    private UserResponse entityResponse(User entity){
+    public static UserResponse entityResponse(User entity){
         UserResponse response = new UserResponse();
         BeanUtils.copyProperties(entity,response);
         return response;

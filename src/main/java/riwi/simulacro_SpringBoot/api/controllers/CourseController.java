@@ -57,7 +57,7 @@ public class CourseController {
     public ResponseEntity<Map<String,String>> delete(
         @PathVariable Long id){
             Map<String,String> response = new HashMap<>();
-            response.put("message","Usuario eliminado correctamente");
+            response.put("message","curso eliminado correctamente");
             this.courseService.delete(id);
             return ResponseEntity.ok(response);
         }

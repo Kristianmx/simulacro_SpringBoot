@@ -1,5 +1,6 @@
 package riwi.simulacro_SpringBoot.infrastructure.services;
 
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import riwi.simulacro_SpringBoot.api.dto.requests.CourseRequest;
 import riwi.simulacro_SpringBoot.api.dto.responses.CourseResponse;
+import riwi.simulacro_SpringBoot.api.dto.responses.UserResponse;
 import riwi.simulacro_SpringBoot.domain.entities.Courses;
 import riwi.simulacro_SpringBoot.domain.entities.User;
 import riwi.simulacro_SpringBoot.domain.repositories.CoursesRepository;
@@ -16,6 +18,7 @@ import riwi.simulacro_SpringBoot.domain.repositories.UserRepository;
 import riwi.simulacro_SpringBoot.infrastructure.abstrac_services.ICourseService;
 import riwi.simulacro_SpringBoot.util.enums.EnumRole;
 import riwi.simulacro_SpringBoot.util.exceptions.IdNotFoundException;
+import riwi.simulacro_SpringBoot.util.exceptions.RoleDenegateException;
 
 // 8
 @Service
@@ -33,15 +36,17 @@ public class CourseService implements ICourseService {
     @Override
     public CourseResponse create(CourseRequest request) {
         Courses courses = this.requesToCourses(request, new Courses());
+
         User user = this.userRepository.findById(request.getUser()).orElseThrow(()-> new IdNotFoundException("User"));
         courses.setUser(user);
-        if (user.getRole().equals(EnumRole.INSTRUCTOR) ) {
-            return this.entityResponse(this.coursesRepository.save(courses));
+        CourseResponse result =new CourseResponse() ;
+        if (!courses.getUser().getRole().equals(EnumRole.INSTRUCTOR) ) {
+             throw  new RoleDenegateException();
         }else{
-            return 
+            result= this.entityResponse(this.coursesRepository.save(courses));
         }
 
-        
+        return result;
     }
 
     // 14
@@ -55,13 +60,23 @@ public class CourseService implements ICourseService {
     public CourseResponse update(CourseRequest request, Long aLong) {
         Courses courses = this.find(aLong);
         Courses courseUpdate = this.requesToCourses(request, courses);
-        return this.entityResponse(this.coursesRepository.save(courseUpdate));
+        User user = this.userRepository.findById(request.getUser()).orElseThrow(()-> new IdNotFoundException("User"));
+        courseUpdate.setUser(user);
+        CourseResponse result =new CourseResponse() ;
+        if (!courseUpdate.getUser().getRole().equals(EnumRole.INSTRUCTOR) ) {
+            throw  new RoleDenegateException();
+        }else{
+            result= this.entityResponse(this.coursesRepository.save(courseUpdate));
+        }
+
+        return result;
     }
 
     // 13
     @Override
     public void delete(Long aLong) {
         Courses courses = this.find(aLong);
+        System.out.println(courses);
         this.coursesRepository.delete(courses);
     }
 
@@ -84,7 +99,9 @@ public class CourseService implements ICourseService {
     // 10
     private CourseResponse entityResponse(Courses entity) {
         CourseResponse response = new CourseResponse();
+        UserResponse user = UserService.entityResponse(entity.getUser());
         BeanUtils.copyProperties(entity, response);
+        response.setUser(user);
         return response;
     }
 

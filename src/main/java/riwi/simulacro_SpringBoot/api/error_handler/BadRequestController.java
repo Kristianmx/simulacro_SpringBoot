@@ -9,6 +9,7 @@ import riwi.simulacro_SpringBoot.api.dto.errors.BaseErrorResponse;
 import riwi.simulacro_SpringBoot.api.dto.errors.ErrorResponse;
 import riwi.simulacro_SpringBoot.api.dto.errors.ErrorsResponse;
 import riwi.simulacro_SpringBoot.util.exceptions.IdNotFoundException;
+import riwi.simulacro_SpringBoot.util.exceptions.RoleDenegateException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,5 +33,10 @@ public class BadRequestController {
             errorList.add(error);
         });
         return ErrorsResponse.builder().code(HttpStatus.BAD_REQUEST.value()).status(HttpStatus.BAD_REQUEST.name()).errors(errorList).build();
+    }
+
+    @ExceptionHandler(RoleDenegateException.class)
+    public BaseErrorResponse handleRoleDenegate(RoleDenegateException exception){
+        return ErrorResponse.builder().message(exception.getMessage()).status(HttpStatus.BAD_REQUEST.name()).code(HttpStatus.BAD_REQUEST.value()).build();
     }
 }
