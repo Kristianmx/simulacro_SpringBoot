@@ -26,35 +26,35 @@ public class User {
     @Enumerated
     private EnumRole role;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(
-            mappedBy = "user",
-            fetch= FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            orphanRemoval = false
-    )
-    private List<Enrollment> enrollments;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(
-            mappedBy = "user",
-            fetch= FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            orphanRemoval = false
-    )
-    private List<Submission> submissions;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(
-            mappedBy = "user",
-            fetch= FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            orphanRemoval = false
-    )
-    private List<Message> messages;
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    @OneToMany(
+//            mappedBy = "user",
+//            fetch= FetchType.EAGER,
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = false
+//    )
+//    private List<Enrollment> enrollments;
+//
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    @OneToMany(
+//            mappedBy = "user",
+//            fetch= FetchType.EAGER,
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = false
+//    )
+//    private List<Submission> submissions;
+//
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    @OneToMany(
+//            mappedBy = "user",
+//            fetch= FetchType.EAGER,
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = false
+//    )
+//    private List<Message> messages;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
