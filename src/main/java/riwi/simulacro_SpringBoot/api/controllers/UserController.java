@@ -37,12 +37,13 @@ public class UserController {
     ){
         return  ResponseEntity.ok(this.userService.get(id));
     }
-
+    @Operation(summary = "Crear un usuario",description = "Permite crear un usuario rellenando los campos requeridos.")
     @PostMapping
     public ResponseEntity<UserResponse> insert(
             @Validated @RequestBody UserRequest user ){
         return  ResponseEntity.ok(this.userService.create(user));
     }
+    @Operation(summary = "Eliminar Usuario",description = "Elimina un usuario proporcionando su id ")
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Map<String,String>> delete(
             @PathVariable Long id){
@@ -51,7 +52,7 @@ public class UserController {
         this.userService.delete(id);
         return  ResponseEntity.ok(response);
     }
-
+    @Operation(summary = "Actualizar usuario",description = "Permite actualizar un usuario rellenando los campos con los datos nuevos y proporcionado su id.")
     @PutMapping(path = "/{id}")
     public ResponseEntity<UserResponse> update(
             @PathVariable Long id,
