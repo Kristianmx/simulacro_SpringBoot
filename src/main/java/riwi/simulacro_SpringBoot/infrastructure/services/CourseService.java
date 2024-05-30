@@ -38,8 +38,11 @@ public class CourseService implements ICourseService {
         Courses courses = this.requesToCourses(request, new Courses());
 
         User user = this.userRepository.findById(request.getUser()).orElseThrow(()-> new IdNotFoundException("User"));
+
         courses.setUser(user);
+
         CourseResponse result =new CourseResponse() ;
+
         if (!courses.getUser().getRole().equals(EnumRole.INSTRUCTOR) ) {
              throw  new RoleDenegateException();
         }else{

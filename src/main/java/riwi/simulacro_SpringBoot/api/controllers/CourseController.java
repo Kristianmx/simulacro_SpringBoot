@@ -63,6 +63,7 @@ public class CourseController {
         }
 
     //22 insert
+    @Operation(summary = "Crear Curso",description = "Ingrese los campos requeridos para crear un curso")
     @PostMapping
     public ResponseEntity<CourseResponse> insert(
         @Validated @RequestBody CourseRequest course){
@@ -70,6 +71,7 @@ public class CourseController {
         }
 
     //21 update
+    @Operation(summary = "Actualizar curso",description = "Ingrese la id del curso a modificar y los datos nuevos del curso")
     @PutMapping(path = "/{id}")
     public ResponseEntity<CourseResponse> update(
         @PathVariable Long id,

@@ -9,5 +9,6 @@ import riwi.simulacro_SpringBoot.domain.entities.Courses;
 @Repository
 public interface CoursesRepository extends JpaRepository<Courses, Long> {
 
+
     
 }
