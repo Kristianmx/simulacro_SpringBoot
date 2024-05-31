@@ -137,3 +137,61 @@ La comparacion (user.getRole().equals(EnumRole.INSTRUCTOR) ) se debe usar de est
 manera debido a que el enum es un String y se puede llamar completamente como entidad
 
 
+                        viernes 31 mayo 2024
+
+23.
+
+@ Kris creo toda la entidad de lesson de ahi desprendende Assignement
+
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/domain/
+entities/Assignement.java
+
+23.1
+
+definimos la relacion de muchos a uno con la entidad lesson
+
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/domain/
+entities/lesson.java
+
+definicion de la relacion uno a muchos en la entidad lesson con la
+etiqueta
+
+24.
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/api/
+dto/requests/AssignementRequest.java
+
+Creamos el Request de Assignement con los datos que necesitamos
+a la hora de crear
+
+25.
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/api/
+dto/responses/AssignementResponse.java
+
+Creamos el Response de Assignement con los datos que mostraremos
+a la hora de llamar a la entidad
+
+Mostramos lessonResponse en vez de toda la entidad completa
+
+26.
+
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/domain/
+repositories/AssignementRepository.java
+
+Creamos el repositorio de la entidad Assignement extendiendo 
+JPA repository poniendo como parametros la entidad y el id
+
+27.
+
+> simulacro_SpringBoot/src/main/java/riwi/simulacro_SpringBoot/infrastructure/
+abstrac_services/IAssignementSevice.java
+
+Creamos el servico abstracto de Assignement para extenderlo con sus 
+metodos HTTP
+
+28.
+creamos el servicio
+
+29.
+invocamos el repositorio
+
+30.

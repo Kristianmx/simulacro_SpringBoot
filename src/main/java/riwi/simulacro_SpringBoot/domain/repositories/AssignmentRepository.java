@@ -3,10 +3,10 @@ package riwi.simulacro_SpringBoot.domain.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import riwi.simulacro_SpringBoot.domain.entities.Courses;
+import riwi.simulacro_SpringBoot.domain.entities.Assignment;
 
-// 4
+// 26
 @Repository
-public interface CoursesRepository extends JpaRepository<Courses, Long> {
+public interface AssignmentRepository extends JpaRepository<Assignment,Long> {
     
 }

@@ -25,6 +25,4 @@ public class LessonRequest {
     @NotNull(message = "El curso de esta lesion es requerido")
     private Long course;
 
-
-
 }

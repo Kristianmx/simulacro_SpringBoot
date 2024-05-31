@@ -1,6 +1,5 @@
 package riwi.simulacro_SpringBoot.infrastructure.services;
 
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

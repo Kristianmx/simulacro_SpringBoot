@@ -1,10 +1,14 @@
 package riwi.simulacro_SpringBoot.domain.entities;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity(name = "lesson")
 @Data
@@ -23,4 +27,15 @@ public class Lesson {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="courses_id",referencedColumnName = "id")
     private Courses courses;
+
+    // 23.4
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(
+            mappedBy = "assignement",
+            fetch= FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = false
+    )
+    private List<Assignment> assignement;
 }

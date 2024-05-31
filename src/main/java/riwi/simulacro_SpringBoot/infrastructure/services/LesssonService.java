@@ -12,25 +12,21 @@ import riwi.simulacro_SpringBoot.api.dto.responses.LessonResponse;
 import riwi.simulacro_SpringBoot.api.dto.responses.UserResponse;
 import riwi.simulacro_SpringBoot.domain.entities.Courses;
 import riwi.simulacro_SpringBoot.domain.entities.Lesson;
-import riwi.simulacro_SpringBoot.domain.entities.User;
 import riwi.simulacro_SpringBoot.domain.repositories.CoursesRepository;
 import riwi.simulacro_SpringBoot.domain.repositories.LessonRepository;
-import riwi.simulacro_SpringBoot.domain.repositories.UserRepository;
 import riwi.simulacro_SpringBoot.infrastructure.abstrac_services.ILessonService;
 import riwi.simulacro_SpringBoot.util.exceptions.IdNotFoundException;
 
-import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class LesssonService implements ILessonService {
+    
     @Autowired
     private  final LessonRepository lessonRepository;
 
     @Autowired
     private final CoursesRepository coursesRepository;
-    @Autowired
-    private final UserRepository userRepository;
     @Override
     public LessonResponse create(LessonRequest request) {
         Courses courses = this.coursesRepository.findById(request.getCourse()).orElseThrow(()->new IdNotFoundException("course"));
@@ -74,6 +70,7 @@ public class LesssonService implements ILessonService {
     private Lesson find(Long id){
         return  this.lessonRepository.findById(id).orElseThrow(()->new IdNotFoundException("Lesson"));
     }
+
     private LessonResponse entityRespose(Lesson entity){
         LessonResponse response = new LessonResponse();
         BeanUtils.copyProperties(entity,response);
@@ -88,6 +85,7 @@ public class LesssonService implements ILessonService {
         response.setCourse(courseResponse);
         return response;
     }
+
     private Lesson requestToEntity(LessonRequest request,Lesson lesson){
         BeanUtils.copyProperties(request,lesson);
         return lesson;
