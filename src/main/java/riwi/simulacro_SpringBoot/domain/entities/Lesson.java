@@ -32,7 +32,7 @@ public class Lesson {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(
-            mappedBy = "assignement",
+            mappedBy = "lesson",
             fetch= FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = false

@@ -46,15 +46,24 @@ public class User {
 //    )
 //    private List<Submission> submissions;
 //
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToMany(
-//            mappedBy = "user",
-//            fetch= FetchType.EAGER,
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = false
-//    )
-//    private List<Message> messages;
+   @ToString.Exclude
+   @EqualsAndHashCode.Exclude
+   @OneToMany(
+           mappedBy = "senderId",
+           fetch= FetchType.EAGER,
+           cascade = CascadeType.ALL,
+           orphanRemoval = false
+   )    private List<Message> messagesSender;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(
+            mappedBy = "receiverId",
+            fetch= FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = false
+    )    private List<Message> messagesReceiver;
+
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

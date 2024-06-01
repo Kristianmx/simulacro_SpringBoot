@@ -56,7 +56,7 @@ public class LessonController {
         return ResponseEntity.ok(this.lessonService.create(lessonRequest));
     }
 
-    @Operation(summary = "Actualizar lesion",description = "Ingrese la id del curso a modificar y los datos nuevos del lesion")
+    @Operation(summary = "Actualizar lesion",description = "Ingrese la id de la lesion a modificar y los datos nuevos de la lesion")
     @PutMapping(path = "/{id}")
     public ResponseEntity<LessonResponse> update(
             @PathVariable Long id,

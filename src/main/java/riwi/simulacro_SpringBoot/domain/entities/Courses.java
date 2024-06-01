@@ -27,8 +27,23 @@ public class Courses {
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "courses",cascade = CascadeType.ALL,orphanRemoval = false)
+    @OneToMany(
+            mappedBy = "courses",
+            fetch= FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Lesson> lessons;
+
+
+    @OneToMany(
+            mappedBy = "coursesId",
+            fetch= FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Message> messages;
+
 }
