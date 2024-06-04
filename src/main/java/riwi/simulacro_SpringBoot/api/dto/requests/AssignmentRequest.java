@@ -21,15 +21,9 @@ public class AssignmentRequest {
 
     @NotBlank(message = "EL titulo del assignement es requerido")
     @Size(max = 100, message = "El titulo excede el limite de caracteres permitido")
-    private String assinementTitle;
-
-    @Column(columnDefinition = "TEXT",nullable = false)
+    private String assignmentTitle;
+    @NotBlank(message = "EL titulo del description es requerido")
     private String description;
-
-    @FutureOrPresent(message = "La fecha y hora debe ser futura")
-    @NotNull(message = "La fecha y hora de la cita es requeridas")
-    private LocalDateTime dueDate;
-
     @NotNull(message = "Debes seleccionar una leccion")
     private Long lesson;
 

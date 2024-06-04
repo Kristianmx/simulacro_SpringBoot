@@ -18,6 +18,8 @@ import riwi.simulacro_SpringBoot.domain.repositories.LessonRepository;
 import riwi.simulacro_SpringBoot.infrastructure.abstrac_services.IAssignmentService;
 import riwi.simulacro_SpringBoot.util.exceptions.IdNotFoundException;
 
+import java.time.LocalDateTime;
+
 //28.
 @Service
 @AllArgsConstructor
@@ -38,6 +40,7 @@ public class AssignmentService implements IAssignmentService {
         Lesson lesson = this.lessonRepository.findById(request.getLesson())
                 .orElseThrow(() -> new IdNotFoundException("lesson"));
 
+        assignment.setDueDate(LocalDateTime.now());
         assignment.setLesson(lesson);
 
         return this.entityResponse(this.assignmentRepository.save(assignment));
@@ -58,7 +61,7 @@ public class AssignmentService implements IAssignmentService {
         Lesson lesson = this.lessonRepository.findById(request.getLesson()).orElseThrow(()-> new IdNotFoundException("Lesson"));
         assignmentUpdate.setLesson(lesson);
 
-        return this.entityResponse(this.assignmentRepository.save(assignment));
+        return this.entityResponse(this.assignmentRepository.save(assignmentUpdate));
 
     }
 

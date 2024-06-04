@@ -7,17 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.AllArgsConstructor;
 import riwi.simulacro_SpringBoot.api.dto.requests.AssignmentRequest;
 import riwi.simulacro_SpringBoot.api.dto.responses.AssignmentResponse;
@@ -62,9 +54,10 @@ public class AssignmentController {
     @Operation(summary = "Crear tarea",description = "Ingrese los datos requeridos para la nueva tarea.")
     @PostMapping
     public ResponseEntity<AssignmentResponse> insert (
-            @Validated @RequestBody AssignmentRequest assignmentRequest
+        @Validated @RequestBody AssignmentRequest request
     ){
-        return ResponseEntity.ok(this.assignmentService.create(assignmentRequest));
+        return ResponseEntity.ok(this.assignmentService.create(request));
+
     }
 
     @Operation(summary = "Actualizar tarea",description = "Ingrese la id de la tarea a modificar y los datos nuevos de la tarea")

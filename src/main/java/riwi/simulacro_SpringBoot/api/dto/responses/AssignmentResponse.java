@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AssignmentResponse {
-    private String assinementTitle;
+    private String assignmentTitle;
     private String  description;
     private LocalDateTime dueDate;
     private LessonResponse lesson;

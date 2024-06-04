@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import riwi.simulacro_SpringBoot.api.dto.requests.CourseRequest;
 import riwi.simulacro_SpringBoot.api.dto.responses.CourseResponse;
+import riwi.simulacro_SpringBoot.api.dto.responses.LessonResponse;
 import riwi.simulacro_SpringBoot.api.dto.responses.UserResponse;
 import riwi.simulacro_SpringBoot.domain.entities.Courses;
+import riwi.simulacro_SpringBoot.domain.entities.Lesson;
 import riwi.simulacro_SpringBoot.domain.entities.User;
 import riwi.simulacro_SpringBoot.domain.repositories.CoursesRepository;
 import riwi.simulacro_SpringBoot.domain.repositories.UserRepository;
@@ -18,6 +20,9 @@ import riwi.simulacro_SpringBoot.infrastructure.abstrac_services.ICourseService;
 import riwi.simulacro_SpringBoot.util.enums.EnumRole;
 import riwi.simulacro_SpringBoot.util.exceptions.IdNotFoundException;
 import riwi.simulacro_SpringBoot.util.exceptions.RoleDenegateException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 // 8
 @Service
@@ -103,7 +108,17 @@ public class CourseService implements ICourseService {
         CourseResponse response = new CourseResponse();
         UserResponse user = UserService.entityResponse(entity.getUser());
         BeanUtils.copyProperties(entity, response);
+        if (entity.getLessons()!= null) {
+            List<LessonResponse> lesson = entity.getLessons().stream().map(this::entityToResponseLesson).collect(Collectors.toList());
+            response.setLessons(lesson);
+        }
         response.setUser(user);
+        return response;
+    }
+
+    private LessonResponse entityToResponseLesson(Lesson entity){
+        LessonResponse response = new LessonResponse();
+        BeanUtils.copyProperties(entity,response);
         return response;
     }
 

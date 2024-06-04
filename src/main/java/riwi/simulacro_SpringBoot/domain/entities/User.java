@@ -36,16 +36,16 @@ public class User {
 //    )
 //    private List<Enrollment> enrollments;
 //
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToMany(
-//            mappedBy = "user",
-//            fetch= FetchType.EAGER,
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = false
-//    )
-//    private List<Submission> submissions;
-//
+   @ToString.Exclude
+   @EqualsAndHashCode.Exclude
+   @OneToMany(
+            mappedBy = "user_id",
+            fetch= FetchType.EAGER,
+          cascade = CascadeType.ALL,
+            orphanRemoval = false
+   )
+    private List<Submission> submissions;
+
    @ToString.Exclude
    @EqualsAndHashCode.Exclude
    @OneToMany(
