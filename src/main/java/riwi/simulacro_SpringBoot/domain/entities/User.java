@@ -26,22 +26,22 @@ public class User {
     @Enumerated
     private EnumRole role;
 
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
-//    @OneToMany(
-//            mappedBy = "user",
-//            fetch= FetchType.EAGER,
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = false
-//    )
-//    private List<Enrollment> enrollments;
-//
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(
+            mappedBy = "user",
+            fetch= FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = false
+    )
+    private List<Enrollment> enrollments;
+
    @ToString.Exclude
    @EqualsAndHashCode.Exclude
    @OneToMany(
             mappedBy = "user_id",
             fetch= FetchType.EAGER,
-          cascade = CascadeType.ALL,
+            cascade = CascadeType.ALL,
             orphanRemoval = false
    )
     private List<Submission> submissions;
@@ -74,4 +74,5 @@ public class User {
             orphanRemoval = false
     )
     private List<Courses> courses;
+
 }

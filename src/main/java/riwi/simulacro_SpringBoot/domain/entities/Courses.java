@@ -23,7 +23,7 @@ public class Courses {
     @Column(nullable = true, columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
     private User user;
 
@@ -46,4 +46,12 @@ public class Courses {
     @EqualsAndHashCode.Exclude
     private List<Message> messages;
 
+    @OneToMany(
+            mappedBy = "course",
+            fetch= FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Enrollment> enrollments;
 }
